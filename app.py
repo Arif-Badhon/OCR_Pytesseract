@@ -17,3 +17,13 @@ threshold_img = cv2.threshold(gray_image, 0, 255, cv2.THRESH_BINARY | cv2.THRESH
 cv2.imshow("Threshold_image", threshold_img)
 cv2.waitKey(2000)
 cv2.destroyAllWindows()
+
+#configuring parameters for tesseract
+custom_config = r'--oem 3 --psm 6'
+
+# now feeding image to tesseract
+details = pytesseract.image_to_data(threshold_img, output_type = Output.DICT, config=custom_config, lang='eng')
+#print(details)
+
+total_boxes = len(details['text'])
+print(total_boxes)
